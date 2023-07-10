@@ -3,14 +3,48 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Faça contato</ion-title>
+    <ion-title class="ion-text-center">Faça Contato</ion-title>
+    <ion-icon name="chatbubbles" slot="end" size="large" class="ion-margin"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Faça contato</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <div *ngIf="!form.sended">
+
+    <p>Preencha todos os campos abaixo para entrar em contato com a equipe do {{ env.appName }}.</p>
+
+    <p>
+      <ion-input label="Nome:" type="text" label-placement="floating" fill="outline" placeholder="Seu nome completo"
+        [autofocus]="true" [(ngModel)]="form.name" error-text="Nome inválido!" required minlength="3"></ion-input>
+    </p>
+
+    <p>
+      <ion-input label="Email:" type="email" label-placement="floating" fill="outline" placeholder="Seu e-mail"
+        [(ngModel)]="form.email" error-text="E-mail inválido!" required email></ion-input>
+    </p>
+
+    <p>
+      <ion-input label="Assunto:" type="text" label-placement="floating" fill="outline" placeholder="Assunto do contato"
+        [(ngModel)]="form.subject" error-text="Assunto inválida!" required minlength="3"></ion-input>
+    </p>
+
+    <p>
+      <ion-textarea label="Mensagem:" labelPlacement="floating" fill="outline" [autoGrow]="true"
+        placeholder="Mensagem do contato" [(ngModel)]="form.message" error-text="Mensagem inválida!" required
+        minlength="5"></ion-textarea>
+    </p>
+
+    <p>
+      <ion-button type="submit" (click)="sendForm()">Enviar</ion-button>
+    </p>
+
+  </div>
+
+  <div *ngIf="form.sended">
+    <h4>Olá {{ form.name }}!</h4>
+    <p>Seu contato foi enviado com sucesso.</p>
+    <p><em>Obrigado...</em></p>
+  </div>
+
 </ion-content>
