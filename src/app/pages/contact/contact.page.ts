@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Auth, User, authState } from '@angular/fire/auth';
 import { Firestore, addDoc, collection } from '@angular/fire/firestore';
-import { environment } from './../../../environments/environment';
+import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contacts',
@@ -11,6 +13,7 @@ export class ContactPage implements OnInit {
 
   public env = environment;
 
+  // Modela entidade form.
   public form = {
     name: '',
     email: '',
@@ -21,16 +24,47 @@ export class ContactPage implements OnInit {
     sended: false
   }
 
+  // Injeta Firestore.
   private firestore: Firestore = inject(Firestore);
 
   // Referência à coleção "contacts" no Firestore.
   // Se a coleção não existe, será criada.
   contactsCollection = collection(this.firestore, 'contacts');
 
-  constructor() { }
+  // Prepara a autenticação do usuário.
+  authState = authState(this.auth);
+  authStateSubscription = new Subscription;
 
-  ngOnInit() { }
+  constructor(
+    // Injeta a dependêndia do Firebase Auth.
+    private auth: Auth = inject(Auth)
+  ) { }
 
+  ngOnInit() {
+
+    // Observer que obtém status de usuário logado.
+    this.authStateSubscription = this.authState.subscribe(
+      (userData: User | null) => {
+
+        // Se tem alguém logado.
+        if (userData) {
+
+          // Preenche os campos 'nome' e 'email'.
+          this.form.name = userData.displayName + '';
+          this.form.email = userData.email + '';
+        }
+      }
+    );
+
+  }
+
+  ngOnDestroy() {
+
+    // Remove o observer ao concluir o componente.
+    this.authStateSubscription.unsubscribe();
+  }
+
+  // Salva contato.
   sendForm() {
 
     // Valida preenchimento dos campos.

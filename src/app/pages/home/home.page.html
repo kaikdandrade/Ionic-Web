@@ -7,15 +7,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Ínicio</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" *ngIf="things">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Lista de documentos</ion-label>
+    </ion-list-header>
 
-  <div class="ion-padding">
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut sint nemo, beatae quaerat ullam voluptas nesciunt
-    officia facilis? Voluptas neque aliquam cupiditate minima repellendus minus tempore quaerat totam laudantium illo?
-  </div>
+    <!-- Loop assíncrono para obter cada item da coleção. -->
+    <ion-item *ngFor="let thing of things | async">
+      <ion-label>
+        <h3 (click)="handleClick(thing.id)">{{ thing.name }}</h3>
+        <p>{{ thing.description }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

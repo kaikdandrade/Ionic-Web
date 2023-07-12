@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { environment as env } from './../environments/environment';
+import { environment as env } from 'src/environments/environment';
 import { redirectUnauthorizedTo, redirectLoggedInTo, AuthGuard } from '@angular/fire/auth-guard';
 
 const toLogin = () => redirectUnauthorizedTo(['/login']);
@@ -45,6 +45,11 @@ const routes: Routes = [
     loadChildren: () => import('./user/profile/profile.module').then(m => m.ProfilePageModule),
     canActivate: [AuthGuard],
     data: { authGuardPipe: toLogin }
+  },
+  {
+    path: 'view',
+    title: `${env.appName} - Visualização`,
+    loadChildren: () => import('./pages/view/view.module').then(m => m.ViewPageModule)
   },
   {
     path: '404',
