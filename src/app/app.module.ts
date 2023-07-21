@@ -5,11 +5,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { environment } from './../environments/environment';
+import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     provideFirebaseApp(() => initializeApp(environment.firebase)), // Conecta ao firebase
     provideAuth(() => getAuth()), // Autenticação do firebase
     provideFirestore(() => getFirestore()), // Banco de dados firebase
+    provideStorage(() => getStorage()), // Storage do firebase
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'

@@ -9,40 +9,54 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
-  <ion-card *ngIf="user" style="max-width: 400px; margin:auto;">
-    <img [alt]="user.displayName" [src]="user.photoURL" style="display: block; margin: auto;" />
+  <ion-card *ngIf="user" style="max-width: 300px; margin: 0 auto;">
+    <ion-img [alt]="user.displayName" [src]="user.photoURL" style="display: block; margin: auto;"></ion-img>
     <ion-card-header>
       <ion-card-title>{{ user.displayName }}</ion-card-title>
       <ion-card-subtitle>{{ user.email }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ul style="margin: 0; padding: 0 0 0 1rem;">
-        <li><strong>Cadastro: </strong> {{ user.metadata.creationTime | date: 'dd/MM/yyyy' }} às {{
-          user.metadata.creationTime | date: 'HH:mm' }}</li>
-        <li><strong>Último login: </strong> {{ user.metadata.lastSignInTime | date: 'dd/MM/yyyy' }} às {{
-          user.metadata.lastSignInTime | date: 'HH:mm' }}</li>
+        <li>
+          <strong>Cadastro: </strong>
+          {{ user.metadata.creationTime | date: 'dd/MM/yyyy' }}
+          às {{ user.metadata.creationTime | date: 'HH:mm' }}
+        </li>
+        <li>
+          <strong>Último login: </strong>
+          {{ user.metadata.lastSignInTime | date: 'dd/MM/yyyy' }}
+          às {{ user.metadata.lastSignInTime | date: 'HH:mm' }}
+        </li>
       </ul>
     </ion-card-content>
   </ion-card>
 
-  <p>Seu perfil é gerenciado pelo <strong>Google</strong>. Clique no botão abaixo para acessar seu perfil.</p>
 
-  <p class="ion-text-center">
-    <ion-button (click)="toProviderProfile()">
-      <ion-icon slot="start" name="logo-google"></ion-icon>
-      Ver perfil no Google
-    </ion-button>
-  </p>
+  <ion-card class="ion-padding">
+    <ion-card-content>
+      <p>Seu perfil é gerenciado pelo <strong>Google</strong>. Clique no botão abaixo para acessar seu perfil.</p>
+      <ion-button (click)="toProviderProfile()">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        Ver perfil no Google
+      </ion-button>
+    </ion-card-content>
 
-  <p>Clique no botão abaixo para sair do aplicativo neste dispositivo. Você precisará entrar novamente para ter acesso
-    aos recursos restritos do <em>{{ env.appName }}</em>.</p>
-
-  <p class="ion-text-center">
-    <ion-button (click)="logout()" color="warning">
-      <ion-icon slot="start" name="log-out"></ion-icon>
-      Sair do aplicativo
-    </ion-button>
-  </p>
-
+    <ion-card-content>
+      <p>Clique no botão abaixo para sair do aplicativo neste dispositivo. Você precisará entrar novamente para ter
+        acesso
+        aos recursos restritos do <em>{{ env.appName }}</em>.</p>
+      <ion-button (click)="logout()" color="warning">
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        Sair do aplicativo
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      <a [href]="env.authorUrl" target="_blank" title="copyright">&copy; 2023 {{ env.author }}.</a>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

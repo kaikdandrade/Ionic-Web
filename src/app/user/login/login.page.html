@@ -9,13 +9,27 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2>Login / Entrar</h2>
-  <p>Logue-se para ter acesso ao conteúdo e ferramentas restritos.</p>
-  <p class="ion-text-center">
-    <ion-button (click)="login()">
-      <ion-icon slot="start" name="logo-google"></ion-icon>
-      Logue-se com o Google
-    </ion-button>
-  </p>
-  <p><em>Se necessário, desligue o bloqueador de popups para este site.</em></p>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Login / Entrar</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>Logue-se para ter acesso ao conteúdo e ferramentas restritos.</p>
+      <ion-button (click)="login()">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        Logue-se com o Google
+      </ion-button>
+  
+      <p><em>Se necessário, desligue o bloqueador de popups para este site.</em></p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      <a [href]="env.authorUrl" target="_blank" title="copyright">&copy; 2023 {{ env.author }}.</a>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

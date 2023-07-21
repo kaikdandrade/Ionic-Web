@@ -29,3 +29,15 @@
 ion-card {
     color: #fff;
 }
+
+a {
+    text-decoration: none;
+}
+
+a[title="copyright"] {
+    color: inherit;
+}
+
+a[title="btn"] {
+    cursor: pointer;
+}

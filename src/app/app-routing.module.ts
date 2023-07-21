@@ -15,22 +15,22 @@ const routes: Routes = [
   {
     path: 'home',
     title: `${env.appName} - Home`,
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'contact',
     title: `${env.appName} - Faça Contato`,
-    loadChildren: () => import('./pages/contact/contact.module').then( m => m.ContactPageModule)
+    loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactPageModule)
   },
   {
     path: 'about',
     title: `${env.appName} - Sobre`,
-    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
+    loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule)
   },
   {
     path: 'policies',
     title: `${env.appName}`,
-    loadChildren: () => import('./pages/policies/policies.module').then( m => m.PoliciesPageModule)
+    loadChildren: () => import('./pages/policies/policies.module').then(m => m.PoliciesPageModule)
   },
   {
     path: 'login',
@@ -52,9 +52,38 @@ const routes: Routes = [
     loadChildren: () => import('./pages/view/view.module').then(m => m.ViewPageModule)
   },
   {
+    path: 'gps',
+    title: 'TEMP - GPS',
+    loadChildren: () => import('./temp/gps/gps.module').then(m => m.GpsPageModule)
+  },
+  {
+    path: 'listAll',
+    title: 'TEMP - LIST ALL',
+    loadChildren: () => import('./temp/listall/listall.module').then(m => m.ListallPageModule)
+  },
+  {
+    path: 'camera',
+    title: `${env.appName} - Tirar Foto`,
+    loadChildren: () => import('./pages/camera/camera.module').then(m => m.CameraPageModule)
+  },
+  {
+    path: 'addDoc',
+    title: `${env.appName} - Novo Documento`,
+    loadChildren: () => import('./pages/addDoc/addDoc.module').then(m => m.AddDocPageModule),
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: toLogin }
+  },
+  {
+    path: 'edit',
+    title: `${env.appName} - Editar Documento`,
+    loadChildren: () => import('./pages/edit/edit.module').then(m => m.EditPageModule),
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: toLogin }
+  },
+  {
     path: '404',
     title: `${env.appName} - Error 404`,
-    loadChildren: () => import('./pages/e404/e404.module').then( m => m.E404PageModule)
+    loadChildren: () => import('./pages/e404/e404.module').then(m => m.E404PageModule)
   },
   {
     path: '**',
@@ -69,4 +98,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

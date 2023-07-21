@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Gps</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>Instalando o plugin do GPS:</p>
+  <pre>npm install @capacitor/geolocation</pre>
+
+  <div *ngIf="coords">
+    <pre>{{ coords | json }}</pre>
+
+    <ion-list>
+      <ion-item>Latitude: {{ coords.latitude }}</ion-item>
+      <ion-item>Longitude: {{ coords.longitude }}</ion-item>
+      <ion-item>Velocidade: {{ coords.speed }}</ion-item>
+      
+      <ion-item>
+        <ion-button [href]="coords.mapURL" target="_blank">
+          <ion-icon name="map" slot="start"></ion-icon>
+          Ver no Google Maps
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div id="map-container" style="width: 100%; height: 100%;"></div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      <a [href]="env.authorUrl" target="_blank" title="copyright">&copy; 2023 {{ env.author }}.</a>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

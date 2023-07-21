@@ -16,8 +16,10 @@ export class AppComponent {
   authStateSubscription: Subscription;
 
   public appPages = [
-    { title: 'Home', url: '/home', icon: 'home' },
+    { title: 'Ínicio', url: '/home', icon: 'home' },
     { title: 'Faça contato', url: '/contact', icon: 'chatbox-ellipses' },
+    { title: 'Tirar foto', url: '/camera', icon: 'camera' },
+    { title: 'Novo documento', url: '/addDoc', icon: 'document-text' },
     { title: 'Sobre', url: '/about', icon: 'information-circle' },
     { title: 'Privacidade', url: '/policies', icon: 'document-lock' }
   ];

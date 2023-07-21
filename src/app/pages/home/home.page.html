@@ -3,22 +3,50 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Ínicio</ion-title>
+    <ion-title class="ion-text-center">Ínicio</ion-title>
+    <ion-icon name="home" slot="end" size="large" class="ion-margin"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="things">
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Lista de documentos</ion-label>
-    </ion-list-header>
+<ion-content class="ion-padding">
+  <ion-accordion-group *ngIf="documents.length > 0">
+    <ion-item>Lista de documentos</ion-item>
+    <ion-accordion *ngFor="let document of documents; let i = index" style="cursor: pointer;">
+      <ion-item slot="header">
+        <ion-label>{{ document.name }}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content" (click)="viewDoc(documentsId[i])">
+        <ion-card>
+          <ion-card-header>
+            <img src="{{ document.imagem.url }}" alt="Imagem do documento {{ document.name }}" style="width: 100px;" />
+          </ion-card-header>
 
-    <!-- Loop assíncrono para obter cada item da coleção. -->
-    <ion-item *ngFor="let thing of things | async">
-      <ion-label>
-        <h3 (click)="handleClick(thing.id)">{{ thing.name }}</h3>
-        <p>{{ thing.description }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+          <ion-card-content>
+            <p><strong>Nome: </strong> {{ general.formatText(document.name) }}</p>
+            <p><strong>Localização: </strong>{{ general.formatText(document.location) }}</p>
+            <p><strong>Descrição: </strong>{{ general.formatText(document.description) }}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <ion-card *ngIf="documents.length === 0">
+    <ion-card-content>
+      <p>Nenhum documento encontrado.</p>
+      <p>Cadastre um novo clicando no botão abaixo.</p>
+      <ion-button routerLink="/addDoc">
+        <ion-icon name="document-text" slot="start"></ion-icon>
+        Novo documento
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      <a [href]="env.authorUrl" target="_blank" title="copyright">&copy; 2023 {{ env.author }}.</a>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
