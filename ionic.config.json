@@ -1,7 +1,0 @@
-{
-  "name": "Ionic-Web",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
