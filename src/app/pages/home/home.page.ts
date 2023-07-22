@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Firestore, collection, query, where, doc, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, query, where, orderBy, onSnapshot } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/services/general.service';
 import { environment } from 'src/environments/environment';
@@ -49,9 +49,10 @@ export class HomePage implements OnInit {
       this.unsubscribeSnapshot()
     }
 
-    const q = query(this.Collection, where("status", "==", "received"));
+    const q = query(this.Collection, where("status", "==", "received"), orderBy("date", "asc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
+        console.log(change.doc);
         if (change.type === "added") {
           this.documentsId.push(change.doc.id);
           this.documents.push(change.doc.data())

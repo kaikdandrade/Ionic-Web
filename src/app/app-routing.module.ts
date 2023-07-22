@@ -9,7 +9,7 @@ const toHome = () => redirectLoggedInTo(['/home']);
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
@@ -87,7 +87,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '404',
+    redirectTo: '/404',
     pathMatch: 'full'
   }
 ];
